@@ -36,4 +36,35 @@ public class Main {
         System.out.println(libreria.toString());
 
     }
+    /*
+     * Probleas
+     * Generación de Reportes de las Transacciones Históricas.
+     * Mostrar los Descuentos en la compra de libros para Clientes Destacados.
+     * Destacar los Libros más populares.
+     * Mostrar las nuevas adquisiciones del negocio.
+    */
+    public static void generarReporteTransacciones(PilaFactura pilaFacturas) {
+        System.out.println("Reporte de Transacciones Históricas:");
+        pilaFacturas.mostrar();// esto sera con pdfs si se puede...
+    }
+    public static void mostrarDescuentosClientesDestacados(PilaFactura pilaFacturas) {
+        System.out.println("Descuentos para Clientes Destacados:");
+        PilaFactura aux = new PilaFactura();
+        while (!pilaFacturas.esVacia()) {
+            Factura factura = pilaFacturas.eli();
+            if (factura.getCliente().getCantidadCompras() > 5) { // cliente destacado
+                System.out.println("Cliente: " + factura.getCliente().getNombre() + ", Descuento: " + factura.getDescuento());
+            }
+            aux.adi(factura);
+        }
+        pilaFacturas.vaciar(aux);
+    }
+    public static void mostrarLibrosPopulares() {
+        System.out.println("Libros más Populares:");
+        // hacer logica para mostrar libros populares
+    }
+    public static void mostrarNuevasAdquisiciones() {
+        System.out.println("Nuevas Adquisiciones del Negocio:");
+        // hacer logica para mostrar nuevas adquisiciones
+    }
 }
