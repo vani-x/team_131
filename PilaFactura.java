@@ -1,13 +1,13 @@
 
 
 
-public class Pila <T>{
+public class PilaFactura {
     private int tope,max=50;
-	private T v[];
+	private Factura v[];
 
-    public Pila() {
+    public PilaFactura() {
         this.tope = -1;
-        v = (T[]) new Object[max]; 
+        this.v = new Factura[max]; 
     }
 
 
@@ -23,7 +23,7 @@ public class Pila <T>{
 		else 
 			return false; //pila no es llena
 	}
-	public void adi(T elem){
+	public void adi(Factura elem){
 		if(!esLlena()){ //si la pila no es llena
 			this.tope++;  //incrementa en una unidad  tope = tope + 1
 			this.v[this.tope] = elem;
@@ -32,8 +32,8 @@ public class Pila <T>{
 		else
 			System.out.println("Pila Llena!!!");
 	}
-	public T eli(){
-		T elem = null;
+	public Factura eli(){
+		Factura elem = null;
 		if(!esVacia()){ //si la pila no es vacia
 			elem = this.v[this.tope];
 			this.tope--; //decrementamos en una unidad
@@ -44,28 +44,29 @@ public class Pila <T>{
 	}
 	
 	public void mostrar(){
-        Pila<T> aux = new Pila<>(); 
-        System.out.println("--- Contenido de la Pila (cima a base) ---");
+        PilaFactura aux = new PilaFactura(); 
+        System.out.println("*****");
         
         while(!esVacia()){
-            T elem = eli();
+            Factura elem = eli();
             System.out.println(elem); // to string
+			System.out.println("-------------------");
             aux.adi(elem);
         } 
         vaciar(aux);
-        System.out.println("----------------------------------------");
+        System.out.println("*****");
     }
-    public void vaciar(Pila<T> p){ 
+    public void vaciar(PilaFactura p){ 
         while(!p.esVacia()){
             this.adi(p.eli());
         }
     }
     
     public int NroElem(){
-        Pila<T> aux = new Pila<>();
+        PilaFactura aux = new PilaFactura();
         int c = 0;
         while(!esVacia()){
-            T elem = eli();
+            Factura elem = eli();
             aux.adi(elem);
             c++;
         } 

@@ -1,0 +1,187 @@
+@startuml LibreriaClassDiagram
+!theme plain
+skinparam classAttributeIconSize 0
+
+class Persona {
+    - String nombre
+    - String apellidoPaterno
+    - String apellidoMaterno
+    - int edad
+    - String ci
+    - char genero
+    
+    + Persona()
+    + Persona(String, String, String, int, String, char)
+    + String toString()
+    + String getNombre()
+    + void setNombre(String)
+    + String getApellidoPaterno()
+    + void setApellidoPaterno(String)
+    + String getApellidoMaterno()
+    + void setApellidoMaterno(String)
+    + int getEdad()
+    + void setEdad(int)
+    + String getCi()
+    + void setCi(String)
+    + char getGenero()
+    + void setGenero(char)
+}
+
+class Cliente {
+    - int cantidadCompras
+    - String direccion
+    - String correo
+    
+    + Cliente(String, String, String, int, String, char, int, String, String)
+    + String toString()
+    + int getCantidadCompras()
+    + void setCantidadCompras(int)
+    + String getDireccion()
+    + void setDireccion(String)
+    + String getCorreo()
+    + void setCorreo(String)
+}
+
+class Vendedor {
+    - String rol
+    - double salario
+    
+    + Vendedor(String, String, String, int, String, char, String, double)
+    + String toString()
+    + String getRol()
+    + void setRol(String)
+    + double getSalario()
+    + void setSalario(double)
+}
+
+class Libro {
+    - String nombre
+    - String autor
+    - String editorial
+    - String genero
+    - String estado
+    - int nroPaginas
+    - double precio
+    
+    + Libro()
+    + Libro(String, String, String, String, String, int, double)
+    + String toString()
+    + String getNombre()
+    + void setNombre(String)
+    + String getAutor()
+    + void setAutor(String)
+    + String getEditorial()
+    + void setEditorial(String)
+    + String getGenero()
+    + void setGenero(String)
+    + String getEstado()
+    + void setEstado(String)
+    + int getNroPaginas()
+    + void setNroPaginas(int)
+    + double getPrecio()
+    + void setPrecio(double)
+}
+
+class Factura {
+    - String Fecha
+    - double montoTotal
+    - double descuento
+    - Cliente cliente
+    - Vendedor vendedor
+    - LD_Carrito listaLibrosVendidos
+    
+    + Factura()
+    + Factura(String, double, double, Cliente, Vendedor, LD_Carrito)
+    + String toString()
+    + String getFecha()
+    + void setFecha(String)
+    + double getMontoTotal()
+    + void setMontoTotal(double)
+    + double getDescuento()
+    + void setDescuento(double)
+    + Cliente getCliente()
+    + void setCliente(Cliente)
+    + Vendedor getVendedor()
+    + void setVendedor(Vendedor)
+    + LD_Carrito getListaLibrosVendidos()
+    + void setListaLibrosVendidos(LD_Carrito)
+}
+
+class Libreria {
+    - String nombre
+    - String direccion
+    - String telefono
+    - PilaFactura pilaFacturas
+    
+    + Libreria(String, String, String, PilaFactura)
+    + String toString()
+    + String getNombre()
+    + void setNombre(String)
+    + String getDireccion()
+    + void setDireccion(String)
+    + String getTelefono()
+    + void setTelefono(String)
+    + PilaFactura getPilaFacturas()
+    + void setPilaFacturas(PilaFactura)
+}
+
+class PilaFactura {
+    - int tope
+    - int max = 50
+    - Factura[] v
+    
+    + PilaFactura()
+    + boolean esVacia()
+    + boolean esLlena()
+    + void adi(Factura)
+    + Factura eli()
+    + void mostrar()
+    + void vaciar(PilaFactura)
+    + int NroElem()
+}
+
+class LD_Carrito {
+    - NodoCarrito p
+    
+    + LD_Carrito()
+    + NodoCarrito getP()
+    + void setP(NodoCarrito)
+    + boolean esVacia()
+    + void adiPrincipio(Libro)
+    + void adiFinal(Libro)
+    + void mostrar()
+    + int nroNodos()
+    + NodoCarrito eliPrincipio()
+    + NodoCarrito eliFinal()
+}
+
+class NodoCarrito {
+    - Libro libro
+    - NodoCarrito ant
+    - NodoCarrito sig
+    
+    + NodoCarrito()
+    + Libro getLibro()
+    + void setLibro(Libro)
+    + NodoCarrito getSig()
+    + void setSig(NodoCarrito)
+    + NodoCarrito getAnt()
+    + void setAnt(NodoCarrito)
+}
+
+' Relaciones de herencia
+Persona <|-- Cliente
+Persona <|-- Vendedor
+
+' Relaciones de composición/agregación
+Libreria *-- PilaFactura : "1"
+PilaFactura o-- Factura : "0..50"
+Factura *-- Cliente : "1"
+Factura *-- Vendedor : "1"
+Factura *-- LD_Carrito : "1"
+LD_Carrito o-- NodoCarrito : "0..*"
+NodoCarrito *-- Libro : "1"
+NodoCarrito --> NodoCarrito : "sig"
+NodoCarrito --> NodoCarrito : "ant"
+
+@enduml
