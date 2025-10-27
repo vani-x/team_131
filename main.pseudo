@@ -1,0 +1,47 @@
+    /*
+     * Probleas
+     * Generación de Reportes de las Transacciones Históricas.
+     * Mostrar los Descuentos en la compra de libros para Clientes Destacados.
+     * Destacar los Libros más populares.
+     * Mostrar las nuevas adquisiciones del negocio.
+    */
+    generarReporteTransacciones(PilaFactura pilaFacturas) {
+        print("Reporte de Transacciones Históricas:");
+        pilaFacturas.mostrar();
+    }
+    mostrarDescuentosClientesDestacados(PilaFactura pilaFacturas) {
+        print("Descuentos para Clientes Destacados:");
+        aux <- new PilaFactura();
+        while (!pilaFacturas.esVacia()) {
+            Factura factura = pilaFacturas.eli();
+            if (factura.getCliente().getCantidadCompras() > 5) { 
+                print("Cliente: " + factura.getCliente().getNombre() + ", Descuento: " + factura.getDescuento());
+            }
+            aux.adi(factura);
+        }
+        pilaFacturas.vaciar(aux);
+    }
+    mostrarLibrosPopulares(LS_Libro listaLibros) {
+        print("Libros Más Populares:");
+        
+        r <- listaLibros.getP();
+        while (r != null) {
+            
+            if (r.getLibro().getVentas() > 100) { 
+                print("Título: " + r.getLibro().getNombre() + ", Ventas: " + r.getLibro().getVentas());
+            }
+            r <- r.getSig();
+        }
+    }
+    mostrarNuevasAdquisiciones(LS_Libro listaLibros, String fechaNueva) {
+        print("Nuevas Adquisiciones:");
+        r <- listaLibros.getP();
+        while (r != null) {
+            
+            if (r.getLibro().getFechaAdquisicion().equals(fechaNueva)) { 
+                print("Título: " + r.getLibro().getNombre() + ", Fecha de Adquisición: " + r.getLibro().getFechaAdquisicion());
+            }
+            r <- r.getSig();
+        }
+        
+    }
