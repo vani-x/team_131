@@ -7,12 +7,11 @@ public class Main {
         Libreria libreria = new Libreria("Libreria Paquito", "Calle 123", "25551234", pilaFacturas);
 
         // los libros deberian estar en una estructura de datos adecuada, aun no implementada
-        Libro libro1 = new Libro("El Quijote", "Miguel de Cervantes", "Editorial A", "Novela", "Nuevo", 500, 29.99);
-        Libro libro2 = new Libro("Cien Años de Soledad", "Gabriel García Márquez", "Editorial B", "Novela", "Nuevo", 400, 24.99);
-        Libro libro3 = new Libro("1984", "George Orwell", "Editorial C", "Ciencia Ficción", "Usado", 300, 19.99);
+        Libro libro1 = new Libro("El Quijote", "Miguel de Cervantes", "Editorial A", "Novela", "Nuevo", 500, 29.99, "2024-05-15");
+        Libro libro2 = new Libro("Cien Años de Soledad", "Gabriel García Márquez", "Editorial B", "Novela", "Nuevo", 400, 24.99, "2024-05-16");
+        Libro libro3 = new Libro("1984", "George Orwell", "Editorial C", "Ciencia Ficción", "Usado", 300, 19.99, "2024-05-17");
 
-    
-        // el carrito de comprar es una funcionalidad, no un dato para una estructura 
+        // el carrito de comprar es una funcionalidad, no un dato para una estructura
         LD_Carrito carrito1 = new LD_Carrito();
         carrito1.adiFinal(libro1);
         carrito1.adiFinal(libro3);
@@ -59,12 +58,29 @@ public class Main {
         }
         pilaFacturas.vaciar(aux);
     }
-    public static void mostrarLibrosPopulares() {
-        System.out.println("Libros más Populares:");
-        // hacer logica para mostrar libros populares
+    public static void mostrarLibrosPopulares(LS_Libro listaLibros) {
+        System.out.println("Libros Más Populares:");
+        
+        NodoLibro r = listaLibros.getP();
+        while (r != null) {
+            
+            if (r.getLibro().getVentas() > 100) { 
+                System.out.println("Título: " + r.getLibro().getNombre() + ", Ventas: " + r.getLibro().getVentas());
+            }
+            r = r.getSig();
+        }
     }
-    public static void mostrarNuevasAdquisiciones() {
-        System.out.println("Nuevas Adquisiciones del Negocio:");
-        // hacer logica para mostrar nuevas adquisiciones
+    public static void mostrarNuevasAdquisiciones(LS_Libro listaLibros, String fechaNueva) {
+        System.out.println("Nuevas Adquisiciones:");
+        
+        NodoLibro r = listaLibros.getP();
+        while (r != null) {
+            
+            if (r.getLibro().getFechaAdquisicion().equals(fechaNueva)) { 
+                System.out.println("Título: " + r.getLibro().getNombre() + ", Fecha de Adquisición: " + r.getLibro().getFechaAdquisicion());
+            }
+            r = r.getSig();
+        }
+        
     }
 }

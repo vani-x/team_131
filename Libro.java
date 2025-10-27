@@ -4,9 +4,10 @@ public class Libro {
     private String estado;// no se si es necesario lo importate es vender xD
     private int nroPaginas;
     private double precio;
+    private String fechaAdquisicion;
 
 
-    public Libro(String nombre, String autor, String editorial, String genero, String estado, int nroPaginas, double precio) {
+    public Libro(String nombre, String autor, String editorial, String genero, String estado, int nroPaginas, double precio, String fechaAdquisicion) {
         this.nombre = nombre;
         this.autor = autor;
         this.editorial = editorial;
@@ -14,6 +15,7 @@ public class Libro {
         this.estado = estado;
         this.nroPaginas = nroPaginas;
         this.precio = precio;
+        this.fechaAdquisicion = fechaAdquisicion;
     }
     public Libro(){}
     @Override
@@ -26,6 +28,7 @@ public class Libro {
                 ", estado='" + estado + '\'' +
                 ", nroPaginas=" + nroPaginas +
                 ", precio=" + precio +
+                ", fechaAdquisicion='" + fechaAdquisicion + '\'' +
                 '}';
     }
     public String getNombre() {
@@ -70,6 +73,13 @@ public class Libro {
     public void setPrecio(double precio) {
         this.precio = precio;
     }
+    public String getFechaAdquisicion() {
+        return fechaAdquisicion;
+    }
+    public void setFechaAdquisicion(String fechaAdquisicion) {
+        this.fechaAdquisicion = fechaAdquisicion;
+    }
+    
 
     
 }

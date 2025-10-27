@@ -54,6 +54,38 @@ class Vendedor {
     + void setSalario(double)
 }
 
+class ColaCircularVendedor {
+    - int ini
+    - int fin
+    - int max = 50
+    - Vendedor[] v
+    
+    + ColaCircularVendedores()
+    + boolean esVacia()
+    + boolean esLlena()
+    + void adi(Vendedor)
+    + Vendedor eli()
+    + void mostrar()
+    + void vaciar(ColaCircularVendedores)
+    + int NroElem()
+}
+
+class ColaSimpleCliente {
+    - int ini
+    - int fin
+    - int max = 50
+    - Cliente[] v
+
+    + ColaSimpleClientes()
+    + boolean esVacia()
+    + boolean esLlena()
+    + void adi(Cliente)
+    + Cliente eli()
+    + void mostrar()
+    + void vaciar(ColaSimpleClientes)
+    + int NroElem()
+}
+
 class Libro {
     - String nombre
     - String autor
@@ -62,9 +94,10 @@ class Libro {
     - String estado
     - int nroPaginas
     - double precio
+    - String fechaAdquisicion
     
     + Libro()
-    + Libro(String, String, String, String, String, int, double)
+    + Libro(String, String, String, String, String, int, double, String)
     + String toString()
     + String getNombre()
     + void setNombre(String)
@@ -80,6 +113,33 @@ class Libro {
     + void setNroPaginas(int)
     + double getPrecio()
     + void setPrecio(double)
+    + String getFechaAdquisicion()
+    + void setFechaAdquisicion(String)
+}
+
+class LS_Libro {
+    - NodoLibro p
+    
+    + LS_Libro()
+    + NodoLibro getP()
+    + void setP(NodoLibro)
+    + boolean esVacia()
+    + void adiPrincipio(Libro)
+    + void adiFinal(Libro)
+    + void mostrar()
+    + int nroNodos()
+    + NodoLibro eliPrincipio()
+    + NodoLibro eliFinal()
+}
+class NodoLibro {
+    - Libro libro
+    - NodoLibro sig
+    
+    + NodoLibro()
+    + Libro getLibro()
+    + void setLibro(Libro)
+    + NodoLibro getSig()
+    + void setSig(NodoLibro)
 }
 
 class Factura {
@@ -174,6 +234,7 @@ Persona <|-- Cliente
 Persona <|-- Vendedor
 
 ' Relaciones de composición/agregación
+' composicion fuerte (*--), composicion debil (o--)
 Libreria *-- PilaFactura : "1"
 PilaFactura o-- Factura : "0..50"
 Factura *-- Cliente : "1"
@@ -181,7 +242,11 @@ Factura *-- Vendedor : "1"
 Factura *-- LD_Carrito : "1"
 LD_Carrito o-- NodoCarrito : "0..*"
 NodoCarrito *-- Libro : "1"
-NodoCarrito --> NodoCarrito : "sig"
-NodoCarrito --> NodoCarrito : "ant"
+LS_Libro o-- NodoLibro : "0..*"
+NodoLibro *-- Libro : "1"
+ColaCircularVendedor o-- Vendedor : "0..50"
+ColaSimpleCliente o-- Cliente : "0..50"
+'NodoCarrito --> NodoCarrito : "sig"
+'NodoCarrito --> NodoCarrito : "ant"
 
 @enduml
